@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Install Date</string>
+
+    <string name="install_date_text">Installation:</string>
+    <string name="last_update_date_text">Last update:</string>
+    <string name="app_name_text">App name:</string>
+</resources>

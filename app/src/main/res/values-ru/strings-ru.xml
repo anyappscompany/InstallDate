@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Дата установки</string>
+
+    <string name="install_date_text">Установка:</string>
+    <string name="last_update_date_text">Обновление:</string>
+    <string name="app_name_text">Приложение:</string>
+</resources>

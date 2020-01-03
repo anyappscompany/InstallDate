@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivAppIcon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppLabel" />
+
+    <TextView
+        android:id="@+id/tvInstallDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Install Date"
+        app:layout_constraintStart_toEndOf="@+id/tvInstallDateText"
+        app:layout_constraintTop_toTopOf="@+id/tvInstallDateText" />
+
+    <TextView
+        android:id="@+id/tvLastUpdateDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Last Update Date"
+        app:layout_constraintStart_toEndOf="@+id/tvLastUpdateDateText"
+        app:layout_constraintTop_toTopOf="@+id/tvLastUpdateDateText" />
+
+    <TextView
+        android:id="@+id/tvInstallDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:text="Install Date:"
+        app:layout_constraintStart_toEndOf="@+id/ivAppIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppNameText" />
+
+    <TextView
+        android:id="@+id/tvLastUpdateDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:text="Last Update Date:"
+        app:layout_constraintStart_toEndOf="@+id/ivAppIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tvInstallDateText" />
+
+    <TextView
+        android:id="@+id/tvAppLabel"
+        style="@style/AppLabelText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="AppLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="AppName"
+        app:layout_constraintStart_toEndOf="@+id/tvAppNameText"
+        app:layout_constraintTop_toTopOf="@+id/tvAppNameText" />
+
+    <TextView
+        android:id="@+id/tvAppNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="App Name:"
+        app:layout_constraintStart_toEndOf="@+id/ivAppIcon"
+        app:layout_constraintTop_toTopOf="@+id/ivAppIcon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

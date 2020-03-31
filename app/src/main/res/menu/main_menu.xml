@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/text_style"
+        android:title="Text Style"
+        app:showAsAction="always|withText"
+        android:icon="@drawable/ic_sort"
+        android:orderInCategory="1"
+        >
+        <!-- text style menu's sub menu start from here -->
+        <menu>
+            <!-- first group (text color) of text style sub menu -->
+            <group
+                android:id="@+id/text_color_group"
+                android:checkableBehavior="single"
+                >
+                <!-- text color group's items -->
+                <item
+                    android:title="@string/btn_sort_apps_by_title"
+                    android:enabled="false"
+                    android:checkable="false"
+                    />
+                <item
+                    android:id="@+id/action_sort_name_ascending"
+                    android:title="@string/menu_item_sort_name_ascending"
+                    >
+                </item>
+                <item
+                    android:id="@+id/action_sort_name_descending"
+                    android:title="@string/menu_item_sort_name_descending"
+                    >
+                </item>
+
+                <item
+                    android:id="@+id/action_sort_app_name_ascending"
+                    android:title="@string/menu_item_sort_app_name_ascending"
+                    >
+                </item>
+                <item
+                    android:id="@+id/action_sort_app_name_descending"
+                    android:title="@string/menu_item_sort_app_name_descending"
+                    >
+                </item>
+
+                <item
+                    android:id="@+id/action_sort_inst_date_ascending"
+                    android:title="@string/menu_item_sort_inst_date_ascending"
+                    >
+                </item>
+                <item
+                    android:id="@+id/action_sort_inst_date_descending"
+                    android:title="@string/menu_item_sort_inst_date_descending"
+                    >
+                </item>
+
+                <item
+                    android:id="@+id/action_sort_update_date_ascending"
+                    android:title="@string/menu_item_sort_update_date_ascending"
+                    >
+                </item>
+                <item
+                    android:id="@+id/action_sort_update_date_descending"
+                    android:title="@string/menu_item_sort_update_date_descending"
+                    >
+                </item>
+            </group>
+        </menu>
+    </item>
+</menu>

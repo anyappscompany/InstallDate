@@ -1,14 +1,17 @@
 package ua.com.anyapps.installdate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -33,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
     ListView lvApps;
     SearchView svSearch;
     ProgressBar pbLoading;
+    View rootView;
+
+    int sorting = 0;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
         lvApps = (ListView) findViewById(R.id.lvApps);
         svSearch = (SearchView) findViewById(R.id.svSearch);
         pbLoading = (ProgressBar)findViewById(R.id.pbLoading);
+        rootView = findViewById(R.id.layRoot);
+
+        sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        sorting = sharedPreferences.getInt("sorting", 0);
+
 
         appListAdapter = new AppListAdapter(context, dynamicListApps);
 
@@ -76,8 +91,104 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sort_name_ascending:
+                Log.d(TAG, "action_sort_name_ascending");
+                sorting = 1;
+                editor.putInt("sorting", 1);
+                editor.commit();
+
+                sortingApps(apps);
+                appListAdapter.setList(context, apps);
+                appListAdapter.notifyDataSetChanged();
+                return true;
+            case R.id.action_sort_name_descending:
+                Log.d(TAG, "action_sort_name_descending");
+                sorting = 2;
+                editor.putInt("sorting", 2);
+                editor.commit();
+
+                sortingApps(apps);
+                appListAdapter.setList(context, apps);
+                appListAdapter.notifyDataSetChanged();
+                return true;
+            case R.id.action_sort_app_name_ascending:
+                Log.d(TAG, "action_sort_app_name_ascending");
+                sorting = 3;
+                editor.putInt("sorting", 3);
+                editor.commit();
+
+                sortingApps(apps);
+                appListAdapter.setList(context, apps);
+                appListAdapter.notifyDataSetChanged();
+                return true;
+            case R.id.action_sort_app_name_descending:
+                Log.d(TAG, "action_sort_app_name_descending");
+                sorting = 4;
+                editor.putInt("sorting", 4);
+                editor.commit();
+
+                sortingApps(apps);
+                appListAdapter.setList(context, apps);
+                appListAdapter.notifyDataSetChanged();
+                return true;
+            case R.id.action_sort_inst_date_ascending:
+                Log.d(TAG, "action_sort_inst_date_ascending");
+                sorting = 5;
+                editor.putInt("sorting", 5);
+                editor.commit();
+
+                sortingApps(apps);
+                appListAdapter.setList(context, apps);
+                appListAdapter.notifyDataSetChanged();
+                return true;
+            case R.id.action_sort_inst_date_descending:
+                Log.d(TAG, "action_sort_inst_date_descending");
+                sorting = 6;
+                editor.putInt("sorting", 6);
+                editor.commit();
+
+                sortingApps(apps);
+                appListAdapter.setList(context, apps);
+                appListAdapter.notifyDataSetChanged();
+                return true;
+            case R.id.action_sort_update_date_ascending:
+                Log.d(TAG, "action_sort_update_date_ascending");
+                sorting = 7;
+                editor.putInt("sorting", 7);
+                editor.commit();
+
+                sortingApps(apps);
+                appListAdapter.setList(context, apps);
+                appListAdapter.notifyDataSetChanged();
+                return true;
+            case R.id.action_sort_update_date_descending:
+                Log.d(TAG, "action_sort_update_date_descending");
+                sorting = 8;
+                editor.putInt("sorting", 8);
+                editor.commit();
+
+                sortingApps(apps);
+                appListAdapter.setList(context, apps);
+                appListAdapter.notifyDataSetChanged();
+                return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
+
 
         showLoader();
 
@@ -102,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
                     String appFile;
                     try {
                         installed = pm.getPackageInfo(packageInfo.packageName, 0).firstInstallTime;
+                        Log.d(TAG, "Installed "  + installed);
                         ico = getPackageManager().getApplicationIcon(packageInfo.packageName);
 
                         ApplicationInfo appInfo;
@@ -124,14 +236,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                Collections.sort(apps, new Comparator() {
-                    @Override
-                    public int compare(Object softDrinkOne, Object softDrinkTwo) {
-                        //comparision for primitive int uses compareTo of the wrapper Integer
-                        return(new String(((OneAppInfo)softDrinkOne).applicationLabel))
-                                .compareTo(((OneAppInfo)softDrinkTwo).applicationLabel);
-                    }
-                });
+                sortingApps(apps);
+
 
                 if(svSearch.getQuery().toString().length()>0) {
                     dynamicListApps.clear();
@@ -156,12 +262,57 @@ public class MainActivity extends AppCompatActivity {
                         showList();
                     }
                 });
+
+
             }
         };
         Thread thread = new Thread(runnable);
         thread.start();
     }
 
+    private void sortingApps(List<OneAppInfo> tApps){
+        svSearch.setQuery("", false);
+        //svSearch.clearFocus();
+        //rootView.requestFocus();
+        Collections.sort(tApps, new Comparator() {
+            @Override
+            public int compare(Object sOne, Object sTwo) {
+                //comparision for primitive int uses compareTo of the wrapper Integer
+                        /*return(new String(((OneAppInfo)sOne).applicationLabel))
+                                .compareTo(((OneAppInfo)sTwo).applicationLabel);*/
+                switch(sorting){
+                    case 0:
+                    case 1:
+                        return(new String(((OneAppInfo)sOne).getApplicationLabel()))
+                                .compareToIgnoreCase(((OneAppInfo)sTwo).getApplicationLabel());
+                    case 2:
+                        return(new String(((OneAppInfo)sTwo).getApplicationLabel()))
+                                .compareToIgnoreCase(((OneAppInfo)sOne).getApplicationLabel());
+                    case 3:
+                        return(new String(((OneAppInfo)sOne).getAppName()))
+                                .compareToIgnoreCase(((OneAppInfo)sTwo).getAppName());
+                    case 4:
+                        return(new String(((OneAppInfo)sTwo).getAppName()))
+                                .compareToIgnoreCase(((OneAppInfo)sOne).getAppName());
+                    case 5:
+                        return(new String(String.valueOf(((OneAppInfo)sOne).getInstallDate())))
+                                .compareTo(String.valueOf(((OneAppInfo)sTwo).getInstallDate()));
+                    case 6:
+                        return(new String(String.valueOf(((OneAppInfo)sTwo).getInstallDate())))
+                                .compareTo(String.valueOf(((OneAppInfo)sOne).getInstallDate()));
+                    case 7:
+                        return(new String(String.valueOf(((OneAppInfo)sOne).getLastUpdateDate())))
+                                .compareTo(String.valueOf(((OneAppInfo)sTwo).getLastUpdateDate()));
+                    case 8:
+                        return(new String(String.valueOf(((OneAppInfo)sTwo).getLastUpdateDate())))
+                                .compareTo(String.valueOf(((OneAppInfo)sOne).getLastUpdateDate()));
+                    default:
+                        return(new String(((OneAppInfo)sOne).applicationLabel))
+                                .compareToIgnoreCase(((OneAppInfo)sTwo).applicationLabel);
+                }
+            }
+        });
+    }
     private void showLoader(){
         pbLoading.setVisibility(View.VISIBLE);
         lvApps.setVisibility(View.GONE);
@@ -172,4 +323,5 @@ public class MainActivity extends AppCompatActivity {
         lvApps.setVisibility(View.VISIBLE);
     }
 }
+
 

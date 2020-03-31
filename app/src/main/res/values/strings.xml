@@ -4,4 +4,13 @@
     <string name="install_date_text">Installation:</string>
     <string name="last_update_date_text">Last update:</string>
     <string name="app_name_text">App name:</string>
+    <string name="btn_sort_apps_by_title">Sort applications by</string>
+    <string name="menu_item_sort_name_ascending">name ↑</string>
+    <string name="menu_item_sort_name_descending">name ↓</string>
+    <string name="menu_item_sort_app_name_ascending">app name ↑</string>
+    <string name="menu_item_sort_app_name_descending">app name ↓</string>
+    <string name="menu_item_sort_inst_date_ascending">install date ↑</string>
+    <string name="menu_item_sort_inst_date_descending">install date ↓</string>
+    <string name="menu_item_sort_update_date_ascending">last update date ↑</string>
+    <string name="menu_item_sort_update_date_descending">last update date ↓</string>
 </resources>

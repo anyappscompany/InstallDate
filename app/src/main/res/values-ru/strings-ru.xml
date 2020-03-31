@@ -4,4 +4,13 @@
     <string name="install_date_text">Установка:</string>
     <string name="last_update_date_text">Обновление:</string>
     <string name="app_name_text">Приложение:</string>
+    <string name="btn_sort_apps_by_title">Сортировать приложения по</string>
+    <string name="menu_item_sort_name_ascending">названию ↑</string>
+    <string name="menu_item_sort_name_descending">названию ↓</string>
+    <string name="menu_item_sort_app_name_ascending">имени приложения ↑</string>
+    <string name="menu_item_sort_app_name_descending">имени приложения ↓</string>
+    <string name="menu_item_sort_inst_date_ascending">дате установки ↑</string>
+    <string name="menu_item_sort_inst_date_descending">дате установки ↓</string>
+    <string name="menu_item_sort_update_date_ascending">дате обновления ↑</string>
+    <string name="menu_item_sort_update_date_descending">дате обновления ↓</string>
 </resources>

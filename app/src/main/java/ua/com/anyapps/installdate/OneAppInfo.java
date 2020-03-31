@@ -2,7 +2,9 @@ package ua.com.anyapps.installdate;
 
 import android.graphics.drawable.Drawable;
 
-public class OneAppInfo {
+import java.util.Comparator;
+
+public class OneAppInfo{
     public String appName;
     public String applicationLabel;
     public long installDate;
